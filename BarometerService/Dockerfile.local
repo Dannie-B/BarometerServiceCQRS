@@ -1,0 +1,15 @@
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+WORKDIR /app
+ARG NUGET_TOKEN
+RUN dotnet nuget add source https://lennartajansson.pkgs.visualstudio.com/_packaging/Kubernetes/nuget/v3/index.json --name Devops --username anything --password ${NUGET_TOKEN} --store-password-in-clear-text
+COPY *.csproj ./
+RUN dotnet restore
+COPY . ./
+RUN dotnet publish -c Release -o out
+
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
+WORKDIR /app
+COPY --from=build /app/out ./
+EXPOSE 80
+EXPOSE 443
+ENTRYPOINT ["dotnet", "BarometerService.dll"]

@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="azure-pipelines.yml" />
+    <File Path="build.ps1" />
+    <File Path="deploy.ps1" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="BarometerService/BarometerService.csproj" />
+  <Project Path="CQRSContracts/CQRSContracts.csproj" Id="a9985598-791c-4758-9b56-476d6bcc262d" />
+  <Project Path="NatsProvider/NatsProvider.csproj" Id="2b0bb631-cfe4-4018-8d94-57cb7d8cb956" />
+</Solution>

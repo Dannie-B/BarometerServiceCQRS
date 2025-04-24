@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<IsPackable>false</IsPackable>
+		<UserSecretsId>eed3828d-35a1-4849-abc2-f2958db10405</UserSecretsId>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="Common.K8s.Api" Version="9.0.0.1" />
+		<PackageReference Include="Common.K8s.Application" Version="9.0.0.2" />
+		<PackageReference Include="Common.K8s.Logging" Version="9.0.0.2" />
+		<PackageReference Include="Common.K8s.Monitoring" Version="9.0.0.12" />
+		<PackageReference Include="Common.K8s.SignalR" Version="9.0.0.5" />
+		<PackageReference Include="Dapper" Version="2.1.66" />
+		
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.*" />
+		
+		<PackageReference Include="NATS.Net" Version="2.5.16" />
+		<PackageReference Include="Scalar.AspNetCore" Version="2.0.*" />
+
+		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0-preview.2.efcore.9.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.*" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.*">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <ProjectReference Include="..\CQRSContracts\CQRSContracts.csproj" />
+	  <ProjectReference Include="..\NatsProvider\NatsProvider.csproj" />
+	</ItemGroup>
+
+</Project>

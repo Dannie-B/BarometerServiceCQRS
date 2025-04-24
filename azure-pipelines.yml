@@ -1,0 +1,58 @@
+# Docker
+# Build a Docker image
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- main
+- master
+
+variables:
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  name: 'BarometerService'
+
+jobs:
+- job: Home
+  pool:
+    name: 'Local'
+    demands: LOCATION -equals HOME
+  steps:
+  - task: PowerShell@2
+    inputs:
+      filePath: '$(Build.SourcesDirectory)/build.ps1'
+      arguments: '$(name)'
+      pwsh: true
+      workingDirectory: '$(Build.SourcesDirectory)'
+  - task: CopyFiles@2
+    inputs:
+      Contents: |
+        **/deploy.ps1
+      TargetFolder: '$(Build.ArtifactStagingDirectory)'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'Deploy'
+      publishLocation: 'Container'
+
+
+- job: Work
+  pool:
+    name: 'Local'
+    demands: LOCATION -equals WORK
+  steps:
+  - task: PowerShell@2
+    inputs:
+      filePath: '$(Build.SourcesDirectory)/build.ps1'
+      arguments: '$(name)'
+      pwsh: true
+      workingDirectory: '$(Build.SourcesDirectory)'
+  - task: CopyFiles@2
+    inputs:
+      Contents: |
+        **/deploy.ps1
+      TargetFolder: '$(Build.ArtifactStagingDirectory)'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'Deploy'
+      publishLocation: 'Container'
